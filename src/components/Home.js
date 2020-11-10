@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addContact, makeContactFavorite } from '../redux/actions';
 
-
 function Home() {
     const dispatch = useDispatch();
     const contacts = useSelector(state => state);
@@ -30,7 +29,7 @@ function Home() {
         <>
             <h1>Contact List</h1>
             <p>show favorites only<input type="checkbox" onClick={() => setShowFavoritesOnly(!showFavoritesOnly)}></input></p>
-            <ul>
+            <ol>
                 {contactList.map(contact => (
                     <li key={contact.id}>
                         <span>Name: {contact.name} | </span>
@@ -40,7 +39,7 @@ function Home() {
                         {(contact.favorites === false) ? <input onClick={() => btnAddtoFav(contact.id)} type="button" value="Add to favorites" /> : "favorite contact"}
                     </li>
                 ))}
-            </ul >
+            </ol >
             <input onClick={btnAddNewContact} type="button" value="Add new contact" />
         </>
     );

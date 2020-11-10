@@ -9,6 +9,10 @@ import rootReducer from './redux/reducer';
 
 const store = createStore(rootReducer);
 
+store.subscribe(() => {
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})
+
 class App extends React.Component {
   render() {
     return (

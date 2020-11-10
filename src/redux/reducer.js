@@ -16,10 +16,8 @@ let initialState = [
 ];
 
 const reducer = (state = initialState, action) => {
-
     switch (action.type) {
         case 'ADD_CONTACT': {
-            console.log([...state, action.payload])
             return [...state, action.payload];
         }
         case 'MAKE_CONTACT_FAVORITE':
@@ -33,7 +31,6 @@ const reducer = (state = initialState, action) => {
                 if (contact.id === action.payload.id) return action.payload
                 else return contact
             })
-            console.log(newState)
             return newState
 
         default: return state;
