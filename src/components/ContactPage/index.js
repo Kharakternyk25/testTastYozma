@@ -1,19 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { changeContact } from '../redux/actions';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeContact } from '../../redux/actions'
 
-function Contact(props) {
-
-    const dispatch = useDispatch();
-    const contacts = useSelector(state => state);
-
+function ContactPage(props) {
+    const dispatch = useDispatch()
+    const contacts = useSelector(state => state)
     const contactId = props.match.params.id.slice(1)
-    let currentContact = contacts.filter((item) => {
-        return (item.id === contactId)
-    })
-
-    const [contact, setContact] = useState(currentContact[0])
+    let currentContact = contacts.find(contact => (contact.id === contactId))
+    const [contact, setContact] = useState(currentContact)
 
     const btnSave = () => {
         dispatch(changeContact(contact))
@@ -21,15 +16,15 @@ function Contact(props) {
     }
 
     return (
-        <div>
+        <>
             <h1>Contact change page</h1>
             <p>Name: <input type="text" value={contact.name} onChange={e => setContact({ ...contact, "name": e.target.value })} /></p>
             <p>Phone: <input type="text" value={contact.phone} onChange={e => setContact({ ...contact, "phone": e.target.value })} /></p>
             <p>Mail: <input type="text" value={contact.mail} onChange={e => setContact({ ...contact, "mail": e.target.value })} /></p>
-            <button><Link to='/'>Back</Link></button>
+            <Link to='/'><input type="button" value="Back" /></Link>
             <input type="button" value="Save" onClick={btnSave} />
-        </div>
+        </>
     );
 }
 
-export default Contact;
+export default ContactPage

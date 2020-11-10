@@ -13,12 +13,12 @@ let initialState = [
         mail: "ivan@mail",
         favorites: false
     }
-];
+]
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_CONTACT': {
-            return [...state, action.payload];
+            return [...state, action.payload]
         }
         case 'MAKE_CONTACT_FAVORITE':
             let newContacts = state.map(contact => {
@@ -32,9 +32,8 @@ const reducer = (state = initialState, action) => {
                 else return contact
             })
             return newState
-
-        default: return state;
+        default: return state
     }
 }
 
-export default reducer;
+export default reducer

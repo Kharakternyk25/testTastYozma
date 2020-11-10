@@ -1,31 +1,28 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Contact from './components/Contact';
-import Home from './components/Home';
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import ContactPage from './components/ContactPage'
+import ContactListPage from './components/ContactListPage'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import rootReducer from './redux/reducer'
 
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducer from './redux/reducer';
-
-const store = createStore(rootReducer);
+const store = createStore(rootReducer)
 
 store.subscribe(() => {
   localStorage.setItem('reduxState', JSON.stringify(store.getState()))
 })
 
-class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/contact/:id" component={Contact} />
-          </Switch>
-        </Router>
-      </Provider>
-    );
-  }
+function App() {
+  return (
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/" exact component={ContactListPage} />
+          <Route path="/contact/:id" component={ContactPage} />
+        </Switch>
+      </Router>
+    </Provider>
+  );
 }
 
-export default App;
+export default App
